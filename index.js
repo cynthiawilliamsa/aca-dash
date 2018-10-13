@@ -11,9 +11,22 @@
 //iteratee is a function that must return something, capture whatever it returns in a variable
 //add the returned value from iteratee tp myNewArray
 //after looping, return  myNewArray
-function map(array, iteratee){
-
-}
+const map = (arr, iteratee)=>{  
+    const newArr = []
+    for(let i=0; i<arr.length; i++) {    
+      // console.log(arr[i]); 
+      if(iteratee) {      
+      //console.log('callback present');
+          newArr.push(iteratee(arr[i]));     
+      }   
+    }       
+     return newArr;
+  }
+  function iteratee(item){
+    return item 
+  }
+  
+  console.log(map([3,2,1], iteratee))
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 //create a function called `filter`, it should take 2 parameters `array` and `iteratee`
