@@ -11,23 +11,26 @@
 //iteratee is a function that must return something, capture whatever it returns in a variable
 //add the returned value from iteratee tp myNewArray
 //after looping, return  myNewArray
+//arr is input arr, iteratee is callback
 const map = (arr, iteratee)=>{  
     const newArr = []
     for(let i=0; i<arr.length; i++) {    
-      // console.log(arr[i]); 
-      if(iteratee) {      
-      //console.log('callback present');
-          newArr.push(iteratee(arr[i]));     
-      }   
+      // calling iteratee function for each iteration of i in arr
+      if(iteratee(arr[i])) {      
+      //pushes iteration to new array if iteratee is true
+        newArr.push(iteratee(arr[i]));     
+        }   
     }       
-     return newArr;
+        return newArr;
   }
-  function iteratee(item){
-    return item 
+  const iteratee = (item) => {
+    //checking for item passed in for thruthiness
+    if(item) {
+      return item;
+      }  
   }
   
-  console.log(map([3,2,1], iteratee))
-
+console.log(map([3,2,1], iteratee)) //test
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 //create a function called `filter`, it should take 2 parameters `array` and `iteratee`
 //`array` must be an array
@@ -37,9 +40,23 @@ const map = (arr, iteratee)=>{
 //     passing in the item from the current loop
 //iteratee will return true or false, if true add the item to myNewArray else do not
 //after looping, return myNewArray
-function filter(array, iteratee){
-
-}
+const filter = (arr, callback) => {  
+    const newArr = [];
+    for(let i=0; i<arr.length; i++) {     
+        if(callback(arr[i])) {
+          newArr.push(arr[i]);
+        // }
+      }
+    }
+    return newArr;
+  }
+  const iteratee = (item) => {
+    if(item < 5) {
+      return item;
+    }
+  }
+  
+  console.log(filter([2,3,6, 9], iteratee)) //test
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 //create a function called `find`, it should take 2 parameters `theArray` and `fnc`
@@ -47,29 +64,53 @@ function filter(array, iteratee){
 //     passing in the item from the current loop
 //fnc will return true or false, if true return the item 
 //after looping, return null
-function find(theArray, fnc){
-
-}
-
+const find = (theArr, fnc) => {
+    for(i = 0; i < theArr.length; i++) {
+      if (fnc(theArr[i]) === true) {
+         return theArr[i]       
+      }
+    }
+    return null;
+  }
+  const fnc = (item) => {
+    if(item === 5) {
+      return true;
+    }
+  }
+  
+  console.log(find([4, 5, 5], fnc)); //test
+  
 
 //return the last item in theArray
-function findLast(theArray){
-
-}
+const findLast = (theArr) => {
+    for(i=0; i < theArr.length; i++) {
+      
+      return theArr[theArr.length-1];
+    }
+  }  
+  console.log(findLast([2,3,6,5,9, 20, 100]))
 
 //return the first element of the array
-function head(theArray){
-
-}
+const head = (theArr) => {
+    for(i=0; i < theArr.length; i++) {    
+      return theArr[0];
+    }
+  }
+  console.log(head([3,6,5,9, 20, 100]))
 
 //create a new array
 //loop theArray in reverse order
 //add the item from each loop to the new array
 //return the new array
-function reverse(theArray){
-
+const reverse = (theArr) => {
+    const newArr = []
+    for(let i=theArr.length-1; i >=0; i--) {
+      newArr.push(theArr[i]);    
+    }
+    return newArr;
+  }
+  console.log(reverse([3,6,5,9, 20, 100]))
 }
-
 //create a new array
 //loop theArray
 //add the item from each loop to the new array except the first item
