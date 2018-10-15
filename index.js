@@ -11,10 +11,26 @@
 //iteratee is a function that must return something, capture whatever it returns in a variable
 //add the returned value from iteratee tp myNewArray
 //after looping, return  myNewArray
-function map(array, iteratee){
-
-}
-
+//arr is input arr, iteratee is callback
+const map = (arr, iteratee)=>{  
+    const newArr = []
+    for(let i=0; i<arr.length; i++) {    
+      // calling iteratee function for each iteration of i in arr
+      if(iteratee(arr[i])) {      
+      //pushes iteration to new array if iteratee is true
+        newArr.push(iteratee(arr[i]));     
+        }   
+    }       
+        return newArr;
+  }
+  const iteratee = (item) => {
+    //checking for item passed in for thruthiness
+    if(item) {
+      return item;
+      }  
+  }
+  
+console.log(map([3,2,1], iteratee)) //test
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 //create a function called `filter`, it should take 2 parameters `array` and `iteratee`
 //`array` must be an array
@@ -24,9 +40,23 @@ function map(array, iteratee){
 //     passing in the item from the current loop
 //iteratee will return true or false, if true add the item to myNewArray else do not
 //after looping, return myNewArray
-function filter(array, iteratee){
-
-}
+const filter = (arr, callback) => {  
+    const newArr = [];
+    for(let i=0; i<arr.length; i++) {     
+        if(callback(arr[i])) {
+          newArr.push(arr[i]);
+        // }
+      }
+    }
+    return newArr;
+  }
+  const iteratee = (item) => {
+    if(item < 5) {
+      return item;
+    }
+  }
+  
+  console.log(filter([2,3,6, 9], iteratee)) //test
 
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 //create a function called `find`, it should take 2 parameters `theArray` and `fnc`
@@ -34,36 +64,66 @@ function filter(array, iteratee){
 //     passing in the item from the current loop
 //fnc will return true or false, if true return the item 
 //after looping, return null
-function find(theArray, fnc){
-
-}
-
+const find = (theArr, fnc) => {
+    for(i = 0; i < theArr.length; i++) {
+      if (fnc(theArr[i]) === true) {
+         return theArr[i]       
+      }
+    }
+    return null;
+  }
+  const fnc = (item) => {
+    if(item === 5) {
+      return true;
+    }
+  }
+  
+  console.log(find([4, 5, 5], fnc)); //test
+  
 
 //return the last item in theArray
-function findLast(theArray){
-
-}
+const findLast = (theArr) => {
+    for(i=0; i < theArr.length; i++) {
+      
+      return theArr[theArr.length-1];
+    }
+  }  
+  console.log(findLast([2,3,6,5,9, 20, 100]))
 
 //return the first element of the array
-function head(theArray){
-
-}
+const head = (theArr) => {
+    for(i=0; i < theArr.length; i++) {    
+      return theArr[0];
+    }
+  }
+  console.log(head([3,6,5,9, 20, 100]))
 
 //create a new array
 //loop theArray in reverse order
 //add the item from each loop to the new array
 //return the new array
-function reverse(theArray){
-
-}
+const reverse = (theArr) => {
+    const newArr = []
+    for(let i=theArr.length-1; i >=0; i--) {
+      newArr.push(theArr[i]);    
+    }
+    return newArr;
+  }
+  console.log(reverse([3,6,5,9, 20, 100]))
 
 //create a new array
 //loop theArray
 //add the item from each loop to the new array except the first item
 //return the new array
-function tail(theArray){
+const tail = (theArr) => {
+    const newArr = []
+    for(let i= 1; i < theArr.length; i++) {
+      newArr.push(theArr[i]);    
+    }
+    return newArr;
+  }
+  console.log(tail([3,6,5,9, 20, 100]))
 
-}
 
 //implement the most basic sorting algorithm there is
 //assume the array will always have numbers
@@ -75,9 +135,29 @@ function tail(theArray){
 //if a swap is done set it to true
 //after each for loop check the variable, if true, continue the while loop
 //if false return theArray
-function sort(theArray){
 
-}
+const sort= (theArr) => {
+  var sorted = false
+  while (!sorted){
+    sorted = true;
+    for (let i = 0; i < theArr.length; i++){ //loops backwards
+     for(let j = 0; j < theArr.length-1; j++){ //loops forwards
+       if(theArr[j]> theArr[j + 1]){ //if last greater than first 
+           let a = theArr[j] //first assigned to a
+           let b = theArr[j + 1] //last assigned to b
+           //swap
+           theArr[j] = b 
+           theArr[j+1] = a
+           sorted = false;
+            }
+          }
+        }        
+    }
+    return theArr;  
+  }
+
+sort ([5, 10, 3, 1])
+
 
 exports.map = map;
 exports.filter = filter;
