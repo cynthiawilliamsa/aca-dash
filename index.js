@@ -110,14 +110,20 @@ const reverse = (theArr) => {
     return newArr;
   }
   console.log(reverse([3,6,5,9, 20, 100]))
-}
+
 //create a new array
 //loop theArray
 //add the item from each loop to the new array except the first item
 //return the new array
-function tail(theArray){
+const tail = (theArr) => {
+    const newArr = []
+    for(let i= 1; i < theArr.length; i++) {
+      newArr.push(theArr[i]);    
+    }
+    return newArr;
+  }
+  console.log(tail([3,6,5,9, 20, 100]))
 
-}
 
 //implement the most basic sorting algorithm there is
 //assume the array will always have numbers
@@ -129,9 +135,22 @@ function tail(theArray){
 //if a swap is done set it to true
 //after each for loop check the variable, if true, continue the while loop
 //if false return theArray
-function sort(theArray){
 
+const sort = (theArr)=> {   
+  const len = theArr.length;
+  for (let i = len-1; i>=0; i--){ //loops arr backwards
+    for(let j = 1; j<=i; j++){ //loops arr forwards
+      if(theArr[j-1]>theArr[j]){ //if last greater than first in arr
+          let swap = theArr[j-1]; //save last to variable
+          theArr[j-1] = theArr[j]; //set last to first
+          theArr[j] = swap; //set first to variable
+       }
+    }
+  }
+  return theArr;
 }
+
+sort([7,5,2,4,3,9]);
 
 exports.map = map;
 exports.filter = filter;
