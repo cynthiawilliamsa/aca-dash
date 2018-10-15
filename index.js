@@ -136,21 +136,28 @@ const tail = (theArr) => {
 //after each for loop check the variable, if true, continue the while loop
 //if false return theArray
 
-const sort = (theArr)=> {   
-  const len = theArr.length;
-  for (let i = len-1; i>=0; i--){ //loops arr backwards
-    for(let j = 1; j<=i; j++){ //loops arr forwards
-      if(theArr[j-1]>theArr[j]){ //if last greater than first in arr
-          let swap = theArr[j-1]; //save last to variable
-          theArr[j-1] = theArr[j]; //set last to first
-          theArr[j] = swap; //set first to variable
-       }
+const sort= (theArr) => {
+  var sorted = false
+  while (!sorted){
+    sorted = true;
+    for (let i = 0; i < theArr.length; i++){ //loops backwards
+     for(let j = 0; j < theArr.length-1; j++){ //loops forwards
+       if(theArr[j]> theArr[j + 1]){ //if last greater than first 
+           let a = theArr[j] //first assigned to a
+           let b = theArr[j + 1] //last assigned to b
+           //swap
+           theArr[j] = b 
+           theArr[j+1] = a
+           sorted = false;
+            }
+          }
+        }        
     }
+    return theArr;  
   }
-  return theArr;
-}
 
-sort([7,5,2,4,3,9]);
+sort ([5, 10, 3, 1])
+
 
 exports.map = map;
 exports.filter = filter;
